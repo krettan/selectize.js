@@ -113,6 +113,41 @@
 				})
 				</script>
 			</div>
+
+			<div class="demo">
+				<h2>Plugin: "select_deselect_all"</h2>
+				<div class="control-group">
+					<label for="select-fruits">Multiple:</label>
+					<select id="select-fruits" class="demo-fruits" placeholder="Select language(s)..." multiple="multiple">
+						<option value="txt">Text</option>
+						<option value="md">Markdown</option>
+						<option value="html">HTML</option>
+						<option value="php">PHP</option>
+						<option value="python">Python</option>
+						<option value="java">Java</option>
+						<option value="js" selected>JavaScript</option>
+						<option value="c#">Ruby</option>
+						<option value="c#">VHDL</option>
+						<option value="c#">Verilog</option>
+						<option value="c#">C#</option>
+						<option value="c++">C/C++</option>
+					</select>
+				</div>
+				<script>
+				$('.demo-fruits').selectize({
+					sortField: 'text',
+					hideSelected: false,
+					plugins: {
+						'select_deselect_all': {
+							title: 'Fruits',
+							maxItems: undefined,
+						},
+						'remove_button': {},
+						'drag_drop': {}
+					}
+				})
+				</script>
+			</div>
 		</div>
 	</body>
 </html>
