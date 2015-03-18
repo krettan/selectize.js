@@ -1821,7 +1821,7 @@
 			var events = silent ? [] : ['change'];
 	
 			debounce_events(this, events, function() {
-				this.clear();
+				this.clear(silent);
 				this.addItems(value, silent);
 			});
 		},
@@ -2491,7 +2491,7 @@
 				}
 	
 				if (!self.options.hasOwnProperty(value)) return;
-				if (inputMode === 'single') self.clear();
+				if (inputMode === 'single') self.clear(silent);
 				if (inputMode === 'multi' && self.isFull()) return;
 	
 				$item = $(self.render('item', self.options[value]));
@@ -3249,8 +3249,6 @@
 		var field_optgroup_label = settings.optgroupLabelField;
 		var field_optgroup_value = settings.optgroupValueField;
 	
-		var optionsMap = {};
-	
 		/**
 		 * Initializes selectize from a <input type="text"> element.
 		 *
@@ -3290,6 +3288,7 @@
 		var init_select = function($input, settings_element) {
 			var i, n, tagName, $children, order = 0;
 			var options = settings_element.options;
+			var optionsMap = {};
 	
 			var readData = function($el) {
 				var data = attr_data && $el.attr(attr_data);
@@ -3663,6 +3662,55 @@
 		})();
 	});
 	
+	
+	Selectize.define('select_deselect_all', function(options) {
+		if (this.settings.mode === 'single') return;
+		var self = this;
+	
+		options = $.extend({
+			select_all: {
+				title: 'Select All',
+				className: 'select-all',
+				labelClass: 'select-all',
+			},
+			deselect_all: {
+				title: 'Select None',
+				className: 'select-none',
+				labelClass: 'select-none',
+			},
+			separator: '/',
+	
+			html: function(data) {
+				return (
+						'<a href="javascript:void(0)" class="' + data.className + '">' +  data.title + '</a>'
+					);
+			}
+		}, options);
+	
+		this.setup = (function() {
+			var original = self.setup;
+			return function() {
+				original.apply(self, arguments);
+	
+				self.$dropdown_select = $(options.html(options.select_all));
+				self.$dropdown_select.on('click', function(e) {
+					var allOptions = self.options;
+					for (var currentOption in allOptions) {
+						self.addItem(currentOption,true);
+					}
+				});
+	
+				self.$dropdown_deselect = $(options.html(options.deselect_all));
+				self.$dropdown_deselect.on('click', function(e) {
+					self.clear(true);
+				});
+	
+				self.$dropdown.prepend(self.$dropdown_deselect);
+				self.$dropdown.prepend(options.separator);
+				self.$dropdown.prepend(self.$dropdown_select);
+			};
+		})();
+	});
 
 	return Selectize;
 }));
