@@ -108,9 +108,13 @@
 .selectize-control.plugin-remove_button .disabled [data-value] .remove {
   border-left-color: #e0e0e0;
 }
-.selectize-control.plugin-select_deselect_all .selectize-dropdown a {
-  padding: 8px 8px;
+.selectize-control.plugin-select_all .selectize-dropdown a {
+  padding: 5px 8px;
   color: inherit;
+  display: block;
+}
+.selectize-control.plugin-select_all .selectize-dropdown a:hover {
+  background: #e8e8e8;
 }
 .selectize-control {
   position: relative;

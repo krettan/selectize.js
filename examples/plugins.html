@@ -118,7 +118,7 @@
 				<h2>Plugin: "select_deselect_all"</h2>
 				<div class="control-group">
 					<label for="select-fruits">Multiple:</label>
-					<select id="select-fruits" class="demo-fruits" placeholder="Select language(s)..." multiple="multiple">
+					<select id="select-fruits" class="demo-fruits" placeholder="Select fruit(s)..." multiple="multiple">
 						<option value="pineapple">Pineapple</option>
 						<option value="banana">Banana</option>
 						<option value="papaya">Papaya</option>
@@ -136,15 +136,8 @@
 				<script>
 				$('.demo-fruits').selectize({
 					sortField: 'text',
-					hideSelected: false,
-					plugins: {
-						'select_deselect_all': {
-							title: 'Fruits',
-							maxItems: undefined,
-						},
-						'remove_button': {},
-						'drag_drop': {}
-					}
+					maxItems: undefined,
+					plugins: ['select_all', 'remove_button', 'drag_drop']
 				})
 				</script>
 			</div>
