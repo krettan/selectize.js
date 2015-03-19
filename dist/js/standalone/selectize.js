@@ -3673,12 +3673,6 @@
 				className: 'select-all',
 				labelClass: 'select-all',
 			},
-			// deselect_all: {
-			// 	title: 'Select None',
-			// 	className: 'select-none',
-			// 	labelClass: 'select-none',
-			// },
-			// separator: '/',
 	
 			html: function(data) {
 				return (
@@ -3700,13 +3694,6 @@
 					}
 				});
 	
-				// self.$dropdown_deselect = $(options.html(options.deselect_all));
-				// self.$dropdown_deselect.on('click', function(e) {
-				// 	self.clear(false);
-				// });
-	
-				// self.$dropdown.prepend(self.$dropdown_deselect);
-				// self.$dropdown.prepend(options.separator);
 				self.$dropdown.prepend(self.$dropdown_select);
 			};
 		})();
