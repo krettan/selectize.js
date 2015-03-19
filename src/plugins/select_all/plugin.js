@@ -14,7 +14,7 @@
  * @author Carl Retzner <carl.retzner@burtcorp.com>
  */
 
- Selectize.define('select_deselect_all', function(options) {
+ Selectize.define('select_all', function(options) {
 	if (this.settings.mode === 'single') return;
 	var self = this;
 
@@ -24,12 +24,6 @@
 			className: 'select-all',
 			labelClass: 'select-all',
 		},
-		deselect_all: {
-			title: 'Select None',
-			className: 'select-none',
-			labelClass: 'select-none',
-		},
-		separator: '/',
 
 		html: function(data) {
 			return (
@@ -47,17 +41,10 @@
 			self.$dropdown_select.on('click', function(e) {
 				var allOptions = self.options;
 				for (var currentOption in allOptions) {
-					self.addItem(currentOption,true);
+					self.addItem(currentOption, false);
 				}
 			});
 
-			self.$dropdown_deselect = $(options.html(options.deselect_all));
-			self.$dropdown_deselect.on('click', function(e) {
-				self.clear(true);
-			});
-
-			self.$dropdown.prepend(self.$dropdown_deselect);
-			self.$dropdown.prepend(options.separator);
 			self.$dropdown.prepend(self.$dropdown_select);
 		};
 	})();
